@@ -1,21 +1,33 @@
 function addItem() {
 	let input = document.getElementById("new-todo");
 	let text = input.value;
-	console.log("input =" + input);
+	const list = document.getElementById("todo-list");
+
 	if (text !== "") {
-		let todo = document.createElement("li");
-		todo.textContent = text;
-		const list = document.getElementById("todo-list");
 		const newItem = document.createElement("li");
+		newItem.classList.add(
+			"border",
+			"border-secondary",
+			"rounded-3",
+			"p-2",
+			"m-1"
+		);
 		newItem.textContent = text;
 		list.appendChild(newItem);
+		input.value = ""; // Clear the input after adding the item
 	}
-	input.value = "";
+}
+
+function removeItem(e) {
+	if (e.target.matches(".rounded-3")) {
+		e.target.remove();
+	}
 }
 
 function onLoad() {
 	console.log("Page and all resources have loaded!");
 	document.getElementById("add-todo").addEventListener("click", addItem);
+	document.getElementById("todo-list").addEventListener("click", removeItem); // Add event listener once
 }
 
 onLoad();
